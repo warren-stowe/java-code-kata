@@ -11,12 +11,14 @@ public class BubbleSort {
      * @param nums an array of unsorted numbers
      * @return an array of sorted numbers from input param
      */
-    public static Integer[] sort(Integer[] nums) {
+    public static int[] sort(int[] nums) {
+
+        if (nums.length == 1) return nums;
 
         for (int i = 0; i < nums.length - 2; i++) {
             int swaps = 0;
 
-            for (int j = 0, k = 1; j < nums.length - 1; j++, k++) {
+            for (int j = 0, k = 1; j < nums.length - 1 - i; j++, k++) {
                 if (nums[j] > nums[k]) {
                     swap(nums, j, k);
                     swaps++;
@@ -27,7 +29,13 @@ public class BubbleSort {
         return nums;
     }
 
-    public static void sortRecursive(Integer[] nums, int pos) {
+    /**
+     * Recursive solution for Bubble Sort.  Uses swaps count = 0 to terminate the recursion;
+     * otherwise the method repeats with pos - 1 narrowing the iteration.
+     * @param nums an array of numbers to be sorted
+     * @param pos current iterations last index to check
+     */
+    public static void sortRecursive(int[] nums, int pos) {
 
         if (nums.length == 1) return;
 
@@ -43,10 +51,15 @@ public class BubbleSort {
         if (swaps == 0) return;
 
         sortRecursive(nums, pos - 1);
-
     }
 
-    private static void swap(Integer[] nums, int f, int s) {
+    /**
+     * Helper function to swap two numbers.
+     * @param nums array of nums with values to swap
+     * @param f first of two indices to swap
+     * @param s second of two indices to swap
+     */
+    private static void swap(int[] nums, int f, int s) {
         int temp = nums[f];
         nums[f] = nums[s];
         nums[s] = temp;
